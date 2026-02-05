@@ -9,8 +9,15 @@ import subprocess
 import os
 import sys
 
-subprocess.run(["/usr/sbin/sshd"], shell=True) #! This starts the SSH server.  Need to execute this manually because there is no SystemD in the container
+
+
+print("Starting SSH server...")
+
+result = subprocess.run("/usr/sbin/sshd", shell=True) #! This starts the SSH server.  Need to execute this manually because there is no SystemD in the container
     #! You need to already have created a "/run/sshd" directory for this to work. Read why in the Dockerfile.
+
+if (result.returncode != 0):  raise RuntimeError("Failed to start SSH server")
+
 
 
 ALLOWED_PUBLIC_KEY = os.environ.get("ALLOWED_PUBLIC_KEY")
@@ -19,18 +26,16 @@ if not (ALLOWED_PUBLIC_KEY):
     raise RuntimeError("ALLOWED_PUBLIC_KEY required")
 
 
-subprocess.run("echo $ALLOWED_PUBLIC_KEY > /root/.ssh/authorized_keys", shell=True)
+# subprocess.run("echo $ALLOWED_PUBLIC_KEY > /root/.ssh/authorized_keys", shell=True)
+
+with open("/root/.ssh/authorized_keys", "w") as f:
+    f.write(ALLOWED_PUBLIC_KEY)
 
 
-
-# try:
-#     print(sys.argv[0])  #$ This   will be the  name of this file (docker_entry_point.py)
-#     print(sys.argv[1])  #$ This will be the first argument passed by CMD in the Dockerfile.
-#     print(sys.argv[2])  #$ This will be the second, and so on.
-#     print(sys.argv[1:]) #$ This will be all the arguments passed by CMD in the Dockerfile after the first one.
-
-# finally:
-#     pass
+# print(sys.argv[0])  #$ This   will be the  name of this file (docker_entry_point.py)
+# print(sys.argv[1])  #$ This will be the first argument passed by CMD in the Dockerfile.
+# print(sys.argv[2])  #$ This will be the second, and so on.
+# print(sys.argv[1:]) #$ This will be all the arguments passed by CMD in the Dockerfile after the first one.
 
 
 
