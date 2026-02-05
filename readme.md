@@ -4,3 +4,5 @@ Once the container is running, you can check if SSH is running on port 22 by try
     docker exec -it <container ID> bash
     ssh localhost -p 22
 `
+
+It should ask you for the password of root.
