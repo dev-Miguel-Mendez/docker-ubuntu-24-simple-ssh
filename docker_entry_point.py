@@ -8,7 +8,6 @@
 import subprocess
 import os
 import sys
-import time
 
 subprocess.run(["/usr/sbin/sshd"], shell=True) #! This starts the SSH server.  Need to execute this manually because there is no SystemD in the container
     #! You need to already have created a "/run/sshd" directory for this to work. Read why in the Dockerfile.
@@ -28,11 +27,18 @@ try:
     print(sys.argv[0])  #$ This   will be the  name of this file (docker_entry_point.py)
     print(sys.argv[1])  #$ This will be the first argument passed by CMD in the Dockerfile.
     print(sys.argv[2])  #$ This will be the second, and so on.
+    print(sys.argv[1:]) #$ This will be all the arguments passed by CMD in the Dockerfile after the first one.
+
 finally:
     pass
 
-# os.execv()
 
-#¡ TEMPORARY
 
-time.sleep(1000000)
+#*  What's os.execv?
+    #$ It will replace the current process with the new one. It is like "exec" in Linux.
+#*  What does it need?
+    #$ First arg: A string with the path to the new program to execute.
+    #$ Second arg: A list of arguments to pass to the new program.
+ 
+
+os.execv(sys.argv[0], sys.argv[1:])
