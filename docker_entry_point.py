@@ -21,14 +21,14 @@ if not (ALLOWED_PUBLIC_KEY):
 
 
 
-try:
-    print(sys.argv[0])  #$ This   will be the  name of this file (docker_entry_point.py)
-    print(sys.argv[1])  #$ This will be the first argument passed by CMD in the Dockerfile.
-    print(sys.argv[2])  #$ This will be the second, and so on.
-    print(sys.argv[1:]) #$ This will be all the arguments passed by CMD in the Dockerfile after the first one.
+# try:
+#     print(sys.argv[0])  #$ This   will be the  name of this file (docker_entry_point.py)
+#     print(sys.argv[1])  #$ This will be the first argument passed by CMD in the Dockerfile.
+#     print(sys.argv[2])  #$ This will be the second, and so on.
+#     print(sys.argv[1:]) #$ This will be all the arguments passed by CMD in the Dockerfile after the first one.
 
-finally:
-    pass
+# finally:
+#     pass
 
 
 
