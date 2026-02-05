@@ -12,6 +12,7 @@ RUN mkdir -p /run/sshd #$ This folder is required for the sshd (SSH daemon) for 
 COPY docker_entry_point.py /docker_entry_point.py
 RUN chmod 777 /docker_entry_point.py
 #- Whatever process this starts becomes the process with PID of 1 when the container starts:
+#- Use ENTRYPOINT when you want to reuse the container or run aditional processes other than the one in CMD.
 ENTRYPOINT ["python3", "/docker_entry_point.py"]
 
 
