@@ -19,6 +19,8 @@ if not (ALLOWED_PUBLIC_KEY):
     raise RuntimeError("ALLOWED_PUBLIC_KEY required")
 
 
+subprocess.run("echo $ALLOWED_PUBLIC_KEY > /root/.ssh/authorized_keys", shell=True)
+
 
 
 # try:
@@ -32,7 +34,7 @@ if not (ALLOWED_PUBLIC_KEY):
 
 
 
-#*  What's os.execp?
+#*  What's os.execvp?
     #$ It will replace the current process with the new one. It is like "exec" in Linux.
 #*  What does it need?
     #$ First arg: A string with the path to the new program to execute.
