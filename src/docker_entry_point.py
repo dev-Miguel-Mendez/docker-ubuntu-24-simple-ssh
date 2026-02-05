@@ -11,7 +11,7 @@ import sys
 
 
 
-print("Starting SSH server...")
+
 
 result = subprocess.run("/usr/sbin/sshd", shell=True) #! This starts the SSH server.  Need to execute this manually because there is no SystemD in the container
     #! You need to already have created a "/run/sshd" directory for this to work. Read why in the Dockerfile.
@@ -45,5 +45,6 @@ with open("/root/.ssh/authorized_keys", "w") as f:
     #$ First arg: A string with the path to the new program to execute.
     #$ Second arg: A list of arguments to pass to the new program.
  
+
 
 os.execvp(sys.argv[1], sys.argv[1:])

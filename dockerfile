@@ -24,4 +24,6 @@ RUN chmod 777 /test_python_program.py
 
 
 #! These will be passed as arguments to the ENTRYPOINT process:
-CMD ["python3", "/test_python_program.py"] 
+CMD ["python3", "-u", "/test_python_program.py"] 
+#! "-u" is for Python to no buffer it's output which does by default.
+
