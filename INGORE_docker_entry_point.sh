@@ -8,6 +8,8 @@
 /usr/sbin/sshd #! This starts the SSH server.  Need to execute this manually because there is no SystemD in the container
      #! You need to already have created a "/run/sshd" directory for this to work. Read why in the Dockerfile.
 
+: "${ALLOWED_SSH_PUBLIC_KEY}
+
 echo "Started!"
 
 exec "$@" #! This executes the command passed as CMD in the Dockerfile.

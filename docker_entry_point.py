@@ -1,0 +1,38 @@
+
+
+#! This file is for things that we need to make sure are executed at container startup, NOT AT BUILD TIME with "RUN".
+#! Also, the only reason why we do it here is because will use the CMD for something else OR CMD could be replaced in the future.
+
+#! This entry file is usually written in bash, but I did it in Python just because I prefer it and Python is installed in the ubuntu image.
+
+import subprocess
+import os
+import sys
+import time
+
+subprocess.run(["/usr/sbin/sshd"], shell=True) #! This starts the SSH server.  Need to execute this manually because there is no SystemD in the container
+    #! You need to already have created a "/run/sshd" directory for this to work. Read why in the Dockerfile.
+
+
+ALLOWED_PUBLIC_KEY = os.environ.get("ALLOWED_PUBLIC_KEY")
+
+if not (ALLOWED_PUBLIC_KEY):
+    raise RuntimeError("ALLOWED_PUBLIC_KEY required")
+
+
+
+
+# exec "$@" #! This executes the command passed as CMD in the Dockerfile.
+
+try:
+    print(sys.argv[0])
+    print(sys.argv[1])
+    print(sys.argv[2])
+finally:
+    pass
+
+# os.execv()
+
+#¡ TEMPORARY
+
+time.sleep(1000000)
