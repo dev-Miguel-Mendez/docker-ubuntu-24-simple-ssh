@@ -21,8 +21,6 @@ if not (ALLOWED_PUBLIC_KEY):
 
 
 
-# exec "$@" #! This executes the command passed as CMD in the Dockerfile.
-
 try:
     print(sys.argv[0])  #$ This   will be the  name of this file (docker_entry_point.py)
     print(sys.argv[1])  #$ This will be the first argument passed by CMD in the Dockerfile.
@@ -34,11 +32,11 @@ finally:
 
 
 
-#*  What's os.execv?
+#*  What's os.execp?
     #$ It will replace the current process with the new one. It is like "exec" in Linux.
 #*  What does it need?
     #$ First arg: A string with the path to the new program to execute.
     #$ Second arg: A list of arguments to pass to the new program.
  
 
-os.execv(sys.argv[0], sys.argv[1:])
+os.execvp(sys.argv[1], sys.argv[1:])
