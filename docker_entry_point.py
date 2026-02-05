@@ -25,9 +25,9 @@ if not (ALLOWED_PUBLIC_KEY):
 # exec "$@" #! This executes the command passed as CMD in the Dockerfile.
 
 try:
-    print(sys.argv[0])
-    print(sys.argv[1])
-    print(sys.argv[2])
+    print(sys.argv[0])  #$ This   will be the  name of this file (docker_entry_point.py)
+    print(sys.argv[1])  #$ This will be the first argument passed by CMD in the Dockerfile.
+    print(sys.argv[2])  #$ This will be the second, and so on.
 finally:
     pass
 
