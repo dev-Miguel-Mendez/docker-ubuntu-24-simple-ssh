@@ -13,7 +13,7 @@ container_name  = input(f"Enter the container name (default: {DEFAULT_CONTAINER_
 DEFAULT_ALLOWED_PUBLIC_KEY = "abc123"
 allowed_public_key = input(f"Enter the allowed public key (default: {DEFAULT_ALLOWED_PUBLIC_KEY}): ") or DEFAULT_ALLOWED_PUBLIC_KEY
 
-CMD = f"docker run --name {container_name} -d {image_name} -e ALLOWED_PUBLIC_KEY={allowed_public_key}"
+CMD = f"docker run --name {container_name}  -e ALLOWED_PUBLIC_KEY={allowed_public_key} -d {image_name}"
 
 print(f"Running: \n  {CMD}")
 
