@@ -30,19 +30,32 @@ with open("/root/.ssh/authorized_keys", "w") as f:
     f.write(ALLOWED_PUBLIC_KEY)
 
 
-# print(sys.argv[0])  #$ This   will be the  name of this file (docker_entry_point.py)
+
+# print(sys.argv[0])  #$ This will be the name of THIS entrypoint file (docker_entry_point.py)
 # print(sys.argv[1])  #$ This will be the first argument passed by CMD in the Dockerfile.
 # print(sys.argv[2])  #$ This will be the second, and so on.
-# print(sys.argv[1:]) #$ This will be all the arguments passed by CMD in the Dockerfile after the first one.
+# print(sys.argv[1:]) #$ This will be all the arguments passed by CMD in the Dockerfile (all items in the argv list from index 1 INCLUDING INDEX 1)
 
 
 
 #*  What's os.execvp?
-    #$ It will replace the current process with the new one. It is like "exec" in Linux.
-#*  What does it need?
-    #$ First arg: A string with the path to the new program to execute.
-    #$ Second arg: A list of arguments to pass to the new program.
+
+    #! READ either:
+        #! Notion page
+        #! /home/miguel/Desktop/vsCodeMain/Practice/Python/12-selected-python-topics-single-git-repo
+
+    #$ It will replace the current process with the new one. It uses the "exec" of Linux.
+
+    #$ "v" and "p" are like flags. You need to read what I gave you.
+
+#*  What does "execvp" do IN THIS CASE?
+    #$ p: will find the first argument (string) in the $PATH and execute it.
+
+    #$ Second arg: A list of arguments to pass to the new program (YOU ALSO NEED TO INCLUDE).
  
 
 
 os.execvp(sys.argv[1], sys.argv[1:])
+#* So will look like:
+
+# os.execvp("python3", ["python3", "app.py", ...]) #$ Yes, with Python3 REPEATED. That is how `os.execvp` works
