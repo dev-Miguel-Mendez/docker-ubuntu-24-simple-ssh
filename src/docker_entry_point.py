@@ -26,6 +26,8 @@ if not (ALLOWED_PUBLIC_KEY):
     raise RuntimeError("ALLOWED_PUBLIC_KEY required")
 
 
+subprocess.run("mkdir /root/.ssh", shell=True)
+
 with open("/root/.ssh/authorized_keys", "w") as f:
     f.write(ALLOWED_PUBLIC_KEY)
 

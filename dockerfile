@@ -1,9 +1,18 @@
 FROM ubuntu:24.04
 
-RUN apt update
-RUN apt install openssh-server -y #! "apt-get" is recommended over "apt" for scripting. I will keep it as "apt" for now though.
 
-RUN rm -rf /var/lib/apt/lists/* #$ This just cleans up downloaded files only needed for installation (reduce image size)
+
+
+
+
+#! We need to run everything in a single RUN so that the downloads from `apt update` are not cached in a layer and can be deleted in the same layer where they are downloaded.
+RUN apt update \ 
+    && apt install -y --no-install-recommends openssh-server python3\  
+    && rm -fr /var/lib/apt/lists/* #$ This removes the package index files from `apt update`
+#! "apt-get" is recommended over "apt" for scripting. I will keep it as "apt" for now though.
+#- "--no-install-recommends" reduced 200MB!!!
+#- rm -fr /var/lib/apt/lists/*  reduced 100MB!!!
+
 
 RUN mkdir -p /run/sshd #$ This folder is required for the sshd (SSH daemon) for temporary state. Since there is no SystemD in the container (which would create this folder by default) we need to create it manually.
 
